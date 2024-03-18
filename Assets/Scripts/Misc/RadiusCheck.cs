@@ -8,7 +8,6 @@ public class RadiusCheck : MonoBehaviour
     [SerializeField] GameObject buffedFX;
     [SerializeField] GameObject nerfedFX;
 
-    //If the player enters the whisky radius they get increased stats
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent(out PlayerStats player))
@@ -20,7 +19,6 @@ public class RadiusCheck : MonoBehaviour
         }
     }
 
-    //If the player enters the whisky radius they get decreased stats
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.TryGetComponent(out PlayerStats player))

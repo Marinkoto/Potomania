@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] Material defaultMat;
     [Header("Components")]
     [SerializeField] SpriteRenderer sr;
+
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -28,12 +29,9 @@ public class EnemyHealth : MonoBehaviour
     {
         health -= amount;
         sr.material = whiteMat;
+        AudioManager.instance.PlayHitSFX(AudioManager.instance.enemyHit);
         Invoke("ResetMaterial", 0.15f);
         Die();
-    }
-    public void IncreaseHealth(float amount)
-    {
-        maxHealth += amount;
     }
     private void Die()
     {

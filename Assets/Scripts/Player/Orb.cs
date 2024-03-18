@@ -15,14 +15,14 @@ public class Orb : MonoBehaviour
         RotateAroundTarget();
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (enemyLayer == (enemyLayer | (1 << other.gameObject.layer)))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(PlayerStats.Instance.abilityDamage / 2f);
+                enemyHealth.TakeDamage(PlayerStats.Instance.abilityDamage);
             }
         }
     }

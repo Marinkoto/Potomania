@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -213787720315454622}
   - component: {fileID: 2270069157658148995}
   m_Layer: 6
-  m_Name: Melee Enemy
+  m_Name: Melee Enemy (LVL 5)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8666071513371558765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.096221, y: -9.637017, z: -0.13599613}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.99643266, g: 1, b: 0.31372547, a: 0.49803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRadius: 40
   attackRange: 0.8
-  moveSpeed: 2
+  moveSpeed: 3
   attackCooldown: 2
   attackDamage: 1
   playerLayer:
@@ -181,9 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f450b0c53d960484f920efbfa40105e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  maxHealth: 1
-  initialMaxHealth: 1
+  health: 4
+  maxHealth: 4
   deathFX: {fileID: 3659737202206157462, guid: 84f7d4c5a287dca46bbc3516e593d2a2, type: 3}
   whiteMat: {fileID: 2100000, guid: 96be0d44dff016a4e904599ae161727c, type: 2}
   defaultMat: {fileID: 0}

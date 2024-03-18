@@ -7,6 +7,7 @@ public class Burp : MonoBehaviour
     [Header("Components")]
     [SerializeField] ParticleSystem[] burpParticles;
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] ParticleSystem burpEffect;
     [Header("Parameters")]
     [SerializeField] float cooldown = 3f;
     [Header("References")]
@@ -19,6 +20,7 @@ public class Burp : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         shield = GetComponent<ShieldTrigger>();
         nextTimeToUse = Time.time + cooldown;
+        burpEffect.gameObject.SetActive(true);
         foreach(var particle in burpParticles)
         {
             particle.gameObject.SetActive(true);
@@ -34,6 +36,7 @@ public class Burp : MonoBehaviour
     }
     private IEnumerator UseBurp()
     {
+        burpEffect.Play();
         spriteRenderer.color = Color.green;
         yield return new WaitForSeconds(0.8f);
         foreach (ParticleSystem burp in burpParticles)

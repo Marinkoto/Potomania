@@ -1,14 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [Header("Enemies + Spawn Points")]
+    [Header("Spawn Points + Enemies")]
     [SerializeField] Transform[] spawnPoints;
-    [SerializeField] List<GameObject> enemyPrefabs;
-    [SerializeField] GameObject bossPrefab;
+    [SerializeField] public GameObject enemyPrefab;
+    [SerializeField] public GameObject bossPrefab;
+    [SerializeField] Transform enemyHolder;
+
     [Header("Parameters")]
     [SerializeField] int wavesCount = 5;
     [SerializeField] float timeBetweenWaves = 5f;
@@ -28,28 +28,32 @@ public class EnemyManager : MonoBehaviour
         while (currentWave < wavesCount)
         {
             yield return new WaitForSeconds(timeBetweenWaves);
-            SpawnWave();
+            StartCoroutine(SpawnWave());
             currentWave++;
         }
     }
 
-    void SpawnWave()
+    IEnumerator SpawnWave()
     {
         int currentEnemies = Mathf.RoundToInt(difficultyCurve.Evaluate(currentWave / (float)wavesCount) * enemiesPerWave);
 
         for (int i = 0; i < currentEnemies; i++)
         {
-            int randomEnemyIndex = Random.Range(0, enemyPrefabs.Count);
-            GameObject enemyPrefab = enemyPrefabs[randomEnemyIndex];
-
-            Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position + new Vector3(Random.Range(0.05f,0.1f), Random.Range(0.05f, 0.1f)), spawnPoint.rotation);
-            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+            StartCoroutine(SpawnEnemy());
+            yield return new WaitForSeconds(timeBetweenEnemies);
         }
+
         if (currentWave % 3 == 0)
         {
             StartCoroutine(SpawnBoss());
         }
+    }
+
+    IEnumerator SpawnEnemy()
+    {
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Instantiate(enemyPrefab, spawnPoint.position + new Vector3(Random.Range(0.05f, 0.1f), Random.Range(0.05f, 0.1f)), spawnPoint.rotation,enemyHolder);
+        yield return null;
     }
 
     IEnumerator SpawnBoss()
@@ -61,4 +65,3 @@ public class EnemyManager : MonoBehaviour
         enemiesPerWave++;
     }
 }
-
