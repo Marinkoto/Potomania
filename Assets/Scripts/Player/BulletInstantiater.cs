@@ -8,7 +8,7 @@ public class BulletInstantiater : MonoBehaviour
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] GameObject bulletPrefab;
     [Header("Parameters")]
-    [SerializeField] float shootDelay;
+    [SerializeField] public float shootDelay;
     [SerializeField] float lifeTime;
     
     private IEnumerator Start()

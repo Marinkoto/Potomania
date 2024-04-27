@@ -10,7 +10,6 @@ namespace CodeMonkey.MonoBehaviours {
         [SerializeField] private float zoom;
 
         private void Start() {
-            followTransform = FindFirstObjectByType<PlayerStats>().transform;
             if (followTransform == null) {
                 
                 cameraFollow.Setup(() => Vector3.zero, () => zoom, true, true);

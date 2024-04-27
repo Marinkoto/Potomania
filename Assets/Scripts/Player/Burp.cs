@@ -5,11 +5,11 @@ using UnityEngine;
 public class Burp : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] ParticleSystem[] burpParticles;
+    [SerializeField] public ParticleSystem[] burpParticles;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] ParticleSystem burpEffect;
     [Header("Parameters")]
-    [SerializeField] float cooldown = 3f;
+    [SerializeField]  public float cooldown = 3f;
     [Header("References")]
     [SerializeField] ShieldTrigger shield;
 

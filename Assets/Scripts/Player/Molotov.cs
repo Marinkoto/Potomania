@@ -7,8 +7,8 @@ public class Molotov : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] GameObject molotovPrefab;
     [Header("Parameters")]
-    [SerializeField] float cooldown = 3f;
-    [SerializeField] float circleRadius = 5f;
+    [SerializeField] public float cooldown = 3f;
+    [SerializeField] public float circleRadius = 5f;
 
     private float nextTimeToUse = 0f; 
 

@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   factor: 1
+  constantApplier: 0
 --- !u!96 &2824771455335095186
 TrailRenderer:
   serializedVersion: 2

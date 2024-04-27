@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4628145648eba4484115ce5667adfe, type: 3}
+  m_Name: Bottle
+  m_EditorClassIdentifier: 
+  abilityName: Bottle of Freedom
+  description: These bottles fly at their own will the direction they are thrown
+    is random and will not follow any command.
+  maxLevel: 5
+  currentLevel: 0
+  abilityBehaviour: {fileID: 0}
+  icon: {fileID: 21300000, guid: a689d3e7516d309489778e890a8fde8b, type: 3}
+  type: 5

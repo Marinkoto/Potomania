@@ -16,10 +16,9 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] ParticleSystem muzzle;
     [SerializeField] AudioClip shootSound;
-    [SerializeField] Volume volume;
     private void Update()
     {
-        if (Time.time >= timeStamp && Input.GetMouseButton(0))
+        if (Time.time >= timeStamp && Input.GetMouseButton(0) && Time.timeScale != 0)
         {
             Shoot();
             timeStamp = Time.time + PlayerStats.Instance.fireRate;
@@ -35,7 +34,7 @@ public class PlayerShoot : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         Vector2 dir = firePoint.transform.right;
         Vector2 pdir = Vector2.Perpendicular(dir) * Random.Range(-spread, spread);
-        rb.AddForce((dir + pdir) * bulletForce, ForceMode2D.Impulse);
+            rb.AddForce((dir + pdir) * bulletForce, ForceMode2D.Impulse);
         Destroy(bullet, 6f);
     }
 

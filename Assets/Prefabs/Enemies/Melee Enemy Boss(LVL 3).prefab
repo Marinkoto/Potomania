@@ -180,8 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f450b0c53d960484f920efbfa40105e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 15
   maxHealth: 3
+  expAmount: 50
   deathFX: {fileID: 3659737202206157462, guid: 84f7d4c5a287dca46bbc3516e593d2a2, type: 3}
   whiteMat: {fileID: 2100000, guid: 96be0d44dff016a4e904599ae161727c, type: 2}
   defaultMat: {fileID: 0}

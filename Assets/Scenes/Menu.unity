@@ -475,9 +475,9 @@ GameObject:
   - component: {fileID: 271576507}
   - component: {fileID: 271576506}
   - component: {fileID: 271576509}
-  - component: {fileID: 271576510}
   - component: {fileID: 271576508}
   - component: {fileID: 271576511}
+  - component: {fileID: 271576512}
   m_Layer: 5
   m_Name: Options Button
   m_TagString: Untagged
@@ -680,18 +680,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &271576510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 271576504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6afa74bc220f714b9bf2dba39f4420c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &271576511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,9 +697,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 271576510}
-          m_TargetAssemblyTypeName: ButtonHoverSound, Assembly-CSharp
-          m_MethodName: PlaySound
+        - m_Target: {fileID: 271576512}
+          m_TargetAssemblyTypeName: ButtonSounds, Assembly-CSharp
+          m_MethodName: HoverSound
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -721,6 +709,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &271576512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271576504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6afa74bc220f714b9bf2dba39f4420c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &511451207
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,8 +1123,8 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 719908703}
-          m_TargetAssemblyTypeName: ButtonHoverSound, Assembly-CSharp
-          m_MethodName: PlaySound
+          m_TargetAssemblyTypeName: ButtonSounds, Assembly-CSharp
+          m_MethodName: HoverSound
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1974,9 +1974,9 @@ GameObject:
   - component: {fileID: 1551102294}
   - component: {fileID: 1551102293}
   - component: {fileID: 1551102296}
-  - component: {fileID: 1551102297}
   - component: {fileID: 1551102295}
   - component: {fileID: 1551102298}
+  - component: {fileID: 1551102300}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -2089,7 +2089,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -17.740532, w: 0}
+  m_margin: {x: 0, y: 0, z: -12.307037, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2192,18 +2192,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1551102297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1551102291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6afa74bc220f714b9bf2dba39f4420c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1551102298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2221,9 +2209,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1551102297}
-          m_TargetAssemblyTypeName: ButtonHoverSound, Assembly-CSharp
-          m_MethodName: PlaySound
+        - m_Target: {fileID: 1551102300}
+          m_TargetAssemblyTypeName: ButtonSounds, Assembly-CSharp
+          m_MethodName: HoverSound
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2233,6 +2221,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1551102300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551102291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6afa74bc220f714b9bf2dba39f4420c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1660392834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2553,7 +2553,7 @@ MonoBehaviour:
   enemyHit: {fileID: 8300000, guid: 33042b03f47c37a4893d7aefdf4dce2c, type: 3}
   playerHit: {fileID: 0}
   levelUp: {fileID: 0}
-  buttonClick: {fileID: 0}
+  buttonClick: {fileID: 8300000, guid: a43c8b2f824d25b449dd7bf368174f26, type: 3}
   buttonHover: {fileID: 8300000, guid: f8e1735123e2c65428c9d05ab2b4b626, type: 3}
 --- !u!4 &1941504936
 Transform:

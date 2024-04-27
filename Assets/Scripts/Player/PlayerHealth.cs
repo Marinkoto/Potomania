@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public bool canBeDamaged;
+    [Header("Parameters")]
+    [SerializeField] public bool canBeDamaged;
     private void Start()
     {
         canBeDamaged = true;

@@ -9,7 +9,10 @@ public class HandleAiming : MonoBehaviour
 
     void Update()
     {
-        Aim();
+        if(Time.time != 0)
+        {
+            Aim();
+        }
     }
 
     private void Aim()

@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] public float health = 1f, maxHealth;
+    [SerializeField] int expAmount;
     [Header("Misc")]
     [SerializeField] GameObject deathFX;
     [SerializeField] Material whiteMat;
@@ -39,6 +40,7 @@ public class EnemyHealth : MonoBehaviour
         {
             GameObject effect = Instantiate(deathFX,transform.position,Quaternion.identity);
             Destroy(effect, 0.5f);
+            ExperienceManager.instance.AddExp(expAmount);
             Destroy(gameObject,0.05f);
         }
     }

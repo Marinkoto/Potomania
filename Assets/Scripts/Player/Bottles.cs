@@ -6,10 +6,10 @@ public class Bottles : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] Transform[] spawnPoints;
-    [SerializeField] GameObject bottlePrefab;
+    [SerializeField] public GameObject bottlePrefab;
     [Header("Parameters")]
-    [SerializeField] float shootSpeed;
-    [SerializeField] float shootDelay;
+    [SerializeField] public float shootSpeed;
+    [SerializeField] public float shootDelay;
 
     private void Start()
     {

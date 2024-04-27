@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] bool canPierce;
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -13,7 +14,14 @@ public class Bullet : MonoBehaviour
             {
                 enemyHealth.TakeDamage(PlayerStats.Instance.damage);
             }
-            Destroy(gameObject);
+            if (!canPierce)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject, 4f);
+            }
         }
     }
 }

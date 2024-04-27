@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public const bool isSet = false;
     public static AudioManager instance;
     [Header("Audio Source")]
     [SerializeField] public AudioSource MusicSource;
@@ -33,10 +32,7 @@ public class AudioManager : MonoBehaviour
     }
     private void Start()
     {
-        if (!isSet)
-        {
-            DontDestroyOnLoad(this);
-        }
+        DontDestroyOnLoad(this);
         MusicSource.Play();
     }
     public void PlaySFX(AudioClip clip)

@@ -7,7 +7,7 @@ using UnityEngine;
 public class HomingBullet : MonoBehaviour
 {
     [Header("Parameters")]
-    [SerializeField] float speed = 10f;
+    [SerializeField] public float speed = 10f;
 
     private Transform target;
     private GameObject player;

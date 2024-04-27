@@ -17,7 +17,7 @@ public class DamageApplierParticle : MonoBehaviour
         particles.GetCollisionEvents(other,colEvents);
         if(other.TryGetComponent(out EnemyHealth enemy))
         {
-            enemy.TakeDamage(PlayerStats.Instance.abilityDamage/2);
+            enemy.TakeDamage(PlayerStats.Instance.abilityDamage / 2);
         }
     }
 }
