@@ -125,6 +125,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  canAttack: 1
   sr: {fileID: 0}
 --- !u!95 &2120553125471048445
 Animator:
@@ -182,8 +183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   maxHealth: 3
-  expAmount: 5
   deathFX: {fileID: 3659737202206157462, guid: 84f7d4c5a287dca46bbc3516e593d2a2, type: 3}
   whiteMat: {fileID: 2100000, guid: 96be0d44dff016a4e904599ae161727c, type: 2}
   defaultMat: {fileID: 0}
   sr: {fileID: 0}
+  loot: {fileID: 4948162295891866423, guid: 7132985658497c347bb5580dcaf0f42c, type: 3}

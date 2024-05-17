@@ -19,5 +19,4 @@ MonoBehaviour:
   currentLevel: 0
   abilityBehaviour: {fileID: 0}
   icon: {fileID: 21300000, guid: 74c232b4fcbec054b90c566c95740a0b, type: 3}
-  replaced: 0
   type: 3

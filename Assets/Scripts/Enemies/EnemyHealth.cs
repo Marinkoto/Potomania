@@ -6,13 +6,13 @@ public class EnemyHealth : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] public float health = 1f, maxHealth;
-    [SerializeField] int expAmount;
     [Header("Misc")]
     [SerializeField] GameObject deathFX;
     [SerializeField] Material whiteMat;
     [SerializeField] Material defaultMat;
     [Header("Components")]
     [SerializeField] SpriteRenderer sr;
+    [SerializeField] GameObject loot;
 
     private void Start()
     {
@@ -40,8 +40,9 @@ public class EnemyHealth : MonoBehaviour
         {
             GameObject effect = Instantiate(deathFX,transform.position,Quaternion.identity);
             Destroy(effect, 0.5f);
-            ExperienceManager.instance.AddExp(expAmount);
-            Destroy(gameObject,0.05f);
+            Instantiate(loot, transform.position, Quaternion.identity);
+            CurrencyManager.instance.AddCurrency(50000);
+            Destroy(gameObject);
         }
     }
 }

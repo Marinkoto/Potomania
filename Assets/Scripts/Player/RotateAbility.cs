@@ -6,21 +6,20 @@ using UnityEngine;
 public class RotateAbility : MonoBehaviour
 {
     [Header("Parameters")]
-    [SerializeField] public float rotationSpeed = 30f;
+    [SerializeField] public float rotationSpeed = 225f;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] public float abilityDistance = 5f;
-    [SerializeField] bool inState;
+    [SerializeField] bool inState = true;
     [Header("Components")]
     [SerializeField] Transform target;
 
-    Transform otherAbility;
+    [SerializeField] Transform otherAbility;
 
     private void OnEnable()
     {
         if (!inState)
         {
-            FindOtherAbility();
-
+            transform.position = Vector2.zero;
             if (target != null && otherAbility != null)
             {
                 float angleBetweenOrbs = Mathf.Atan2(otherAbility.position.y - target.position.y, otherAbility.position.x - target.position.x);
@@ -36,20 +35,6 @@ public class RotateAbility : MonoBehaviour
             else
             {
                 PositionAbilitiesAroundPlayer();
-            }
-        }
-    }
-
-    private void FindOtherAbility()
-    {
-        RotateAbility[] abilities = FindObjectsOfType<RotateAbility>();
-
-        foreach (RotateAbility ability in abilities)
-        {
-            if (ability != this)
-            {
-                otherAbility = ability.transform;
-                break;
             }
         }
     }

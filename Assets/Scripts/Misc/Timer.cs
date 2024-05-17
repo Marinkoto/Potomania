@@ -11,18 +11,20 @@ public class Timer : MonoBehaviour
     [SerializeField] bool isActive = false;
     [SerializeField] float currentTime;
     [SerializeField] float upgradeInterval = 300f;
+    [SerializeField] float upgradeIntervalBoss = 200f;
+    [HideInInspector] float upgradeTimer = 0f;
+    [HideInInspector] float upgradeTimerBoss = 0f;
+    [HideInInspector] int indexEnemy = 0;
+    [HideInInspector] int indexBoss = 0;
     [Header("Components")]
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] EnemyManager enemyManager;
     [SerializeField] EnemyHolder enemyHolder;
-
-    public float upgradeTimer = 0f;
-    private int index = 0;
-
     private void Start()
     {
         currentTime = 0;
         TimerState(true);
+        AudioManager.instance.MusicSource.volume = 0.05f;
     }
     private void Update()
     {
@@ -49,19 +51,19 @@ public class Timer : MonoBehaviour
         upgradeTimer += Time.deltaTime;
         if(upgradeTimer >= upgradeInterval)
         {
-            index++;
-            enemyManager.enemyPrefab = enemyHolder.enemies[index];
+            indexEnemy++;
+            enemyManager.enemyPrefab = enemyHolder.enemies[indexEnemy];
             upgradeTimer = 0;
         }
     }
     private void UpgradeBoss()
     {
-        upgradeTimer += Time.deltaTime;
-        if (upgradeTimer >= upgradeInterval + 200)
+        upgradeTimerBoss += Time.deltaTime;
+        if (upgradeTimerBoss >= upgradeIntervalBoss)
         {
-            index++;
-            enemyManager.bossPrefab = enemyHolder.bosses[index];
-            upgradeTimer = 0;
+            indexBoss++;
+            enemyManager.bossPrefab = enemyHolder.bosses[indexBoss];
+            upgradeTimerBoss = 0;
         }
     }
 }

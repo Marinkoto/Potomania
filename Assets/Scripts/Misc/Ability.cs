@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,6 @@ public class Ability : ScriptableObject
     [SerializeField] public int currentLevel;
     [SerializeField] public GameObject abilityBehaviour;
     [SerializeField] public Sprite icon;
-    [SerializeField] public bool replaced;
     public enum AbilityType
     {
         Molotov,
@@ -23,7 +23,10 @@ public class Ability : ScriptableObject
         Orb,
         Rock,
         Bottle,
-        Burp
+        Burp,
+        Ring,
+        Boots,
+        QuickHands
     }
     [SerializeField] public AbilityType type;
 
@@ -42,12 +45,17 @@ public class Ability : ScriptableObject
                     {
                         orbs[0].gameObject.SetActive(true);
                     }
-                    if (currentLevel % 2 == 0 && currentLevel != 6) 
+                    else if (currentLevel % 2 == 0 && currentLevel != 6)
                     {
-                        int orbsToActivate = currentLevel / 2;
-                        for (int i = 0; i <= Mathf.Min(orbs.Length, orbsToActivate); i++)
+                        int activatedOrb = currentLevel % 4;
+                        switch (activatedOrb)
                         {
-                            orbs[i].gameObject.SetActive(true);
+                            case 2: 
+                                orbs[1].gameObject.SetActive(true);
+                                break;
+                            case 0: 
+                                orbs[2].gameObject.SetActive(true);
+                                break;
                         }
                     }
                     else if (currentLevel % 2 == 1)
@@ -65,9 +73,8 @@ public class Ability : ScriptableObject
                     {
                         foreach (var orb in orbs)
                         {
-                            orb.abilityDistance = 5;
-                            orb.transform.localScale = new Vector2(2, 2);
                             orb.gameObject.SetActive(true);
+                            orb.transform.localScale = new Vector2(1.25f, 1.25f);
                         }
                     }
                     foreach (var orb in orbs)
@@ -132,7 +139,7 @@ public class Ability : ScriptableObject
                     {
                         foreach (var knife in knives)
                         {
-                            knife.GetComponent<RotateAbility>().enabled = true;
+                            knife.AddComponent<RotateAbility>();
                         }
                     }
                     break;
@@ -196,6 +203,17 @@ public class Ability : ScriptableObject
                     {
                         shield.enabled = true;
                     }
+                    break;
+                case AbilityType.Ring:
+                    PlayerStats.Instance.pickUpRange += 1;
+                    break;
+                case AbilityType.Boots:
+                    PlayerStats.Instance.moveSpeedInRadius += 0.24f;
+                    PlayerStats.Instance.moveSpeedOutRadius += 0.24f;
+                    break;
+                case AbilityType.QuickHands:
+                    PlayerStats.Instance.fireRateInRadius -= 0.03f;
+                    PlayerStats.Instance.fireRateOutRadius -= 0.05f;
                     break;
                 default:
                     break;

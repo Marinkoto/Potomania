@@ -21,14 +21,24 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float damage;
     [SerializeField] public float abilityDamage;
     [Header("Health System")]
-    [SerializeField] public int maxHealth;
-    [SerializeField] public int playerHealth;
+    [SerializeField] public float maxHealth;
+    [SerializeField] public float playerHealth;
     [Header("Misc")]
     [SerializeField] public int bulletAmount;
+    [SerializeField] public PlayerType type;
     [Header("Experience System")]
     [SerializeField] int currentExp;
     [SerializeField] public int maxExp;
     [SerializeField] int level;
+    [SerializeField] public int pickUpRange;
+    public enum PlayerType
+    {
+        AK,
+        Pistol,
+        Shotgun,
+        Shuriken
+    }
+
     private void Awake()
     {
         if (Instance == null)
@@ -40,6 +50,10 @@ public class PlayerStats : MonoBehaviour
             DestroyImmediate(this);
         }
         level = 1;
+    }
+    private void Start()
+    {
+        SetStats();
     }
     private void OnEnable()
     {
@@ -65,12 +79,13 @@ public class PlayerStats : MonoBehaviour
     private void LevelUp()
     {
         level++;
-        damage += 0.15f;
+        damage += 0.05f;
         abilityDamage += 0.2f;
+        AudioManager.instance.PlayLevelUPSFX(AudioManager.instance.levelUp);
         abilityManager.UpdateUpgradePopupUI();
         if (level >= 5)
         {
-            maxExp = Mathf.RoundToInt(maxExp * 1.5f);
+            maxExp = Mathf.RoundToInt(maxExp * 1.25f);
         }
         else
         {
@@ -78,5 +93,28 @@ public class PlayerStats : MonoBehaviour
 
         }
         currentExp = 0;
+    }
+    private void SetStats()
+    {
+        switch (type)
+        {
+            case PlayerType.AK:
+                damage = SkillManager.instance.damage / 4;
+                break;
+            case PlayerType.Pistol:
+                damage = SkillManager.instance.damage;
+                break;
+            case PlayerType.Shotgun:
+                damage = SkillManager.instance.damage / 4;
+                break;
+            case PlayerType.Shuriken:
+                damage = SkillManager.instance.damage / 3;
+                break;
+            default:
+                break;
+        }
+        maxHealth = SkillManager.instance.health;
+        moveSpeedInRadius = SkillManager.instance.moveSpeedInRange;
+        moveSpeedOutRadius = SkillManager.instance.moveSpeedOutRange;
     }
 }

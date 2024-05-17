@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Knives
   m_EditorClassIdentifier: 
   abilityName: Pocket 'Nifes
-  description: Increases damage area by 5%.
+  description: 'Increases damage area by 5%
+
+    Level:1 +1'
   maxLevel: 5
   currentLevel: 1
   abilityBehaviour: {fileID: 0}

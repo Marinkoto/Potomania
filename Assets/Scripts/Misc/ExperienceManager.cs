@@ -13,6 +13,8 @@ public class ExperienceManager : MonoBehaviour
     [Header("UI Components")]
     [SerializeField] private Slider expBar;
     [SerializeField] private TextMeshProUGUI levelText, expCounter;
+    [Header("Parameters")]
+    [SerializeField] float currentVelocity = 0;
     private void Awake()
     {
         instance = this;
@@ -31,7 +33,8 @@ public class ExperienceManager : MonoBehaviour
     }
     public void SetExperienceBar(int currentExp, int maxExp, int level)
     {
-        expBar.value = currentExp;
+        float currentValue = Mathf.SmoothDamp(expBar.value, currentExp, ref currentVelocity, 50 * Time.deltaTime);
+        expBar.value = currentValue;
         expBar.maxValue = maxExp;
         levelText.text = $"Level {level}";
         expCounter.text = $"{currentExp}/{maxExp}";

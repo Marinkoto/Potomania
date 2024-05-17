@@ -11,12 +11,11 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] float attackCooldown = 2f;
     [SerializeField] int attackDamage = 1;
     [SerializeField] LayerMask playerLayer;
+    [SerializeField] bool canAttack = true;
     [Header("Components")]
     [SerializeField] SpriteRenderer sr;
 
     private Transform player;
-    private bool canAttack = true;
-
     void Start()
     {
         FindPlayer();

@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
@@ -15,11 +16,8 @@ public class AbilityManager : MonoBehaviour
     [SerializeField] Button[] abilityButtons;
 
     [Header("Abilities")]
-    [SerializeField] Ability[] abilities;
-    [SerializeField] Ability moveSpeedAbility;
-
-    [Header("Parameters")]
-    [SerializeField] int maxAbilities;
+    [SerializeField] List<Ability> abilities;
+    HashSet<Ability> chosenAbilities = new();
 
     private void Start()
     {
@@ -43,10 +41,12 @@ public class AbilityManager : MonoBehaviour
         {
             ability.Upgrade();
             UpdateDescription(ability, ability.currentLevel + 1);
+            particleEffect.gameObject.SetActive(false);
         }
         else
         {
             UpdateUpgradePopupUI();
+            particleEffect.gameObject.SetActive(false);
         }
     }
 
@@ -84,6 +84,15 @@ public class AbilityManager : MonoBehaviour
             case Ability.AbilityType.Rock:
                 ability.description = "Player starts to throw rocks at enemies, it detects enemies automatically so you don't have to worry about the aim.";
                 break;
+            case Ability.AbilityType.Ring:
+                ability.description = "Player picks up bottles from a longer distance.";
+                break;
+            case Ability.AbilityType.Boots:
+                ability.description = "Makes the player move faster because that's what good shoes do.";
+                break;
+            case Ability.AbilityType.QuickHands:
+                ability.description = "The hands of the player become faster at shooting.";
+                break;
             default:
                 break;
         }
@@ -92,26 +101,24 @@ public class AbilityManager : MonoBehaviour
     public void UpdateUpgradePopupUI()
     {
         upgradePanel.SetActive(true);
-        particleEffect.Play();
+        particleEffect.gameObject.SetActive(true);
         ShuffleAbilities();
         Camera.main.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = false;
-        HashSet<Ability> chosenAbilities = new(); 
-        int activeAbilitiesCount = 0;
 
         for (int i = 0; i < abilityButtons.Length; i++)
         {
             if (abilities[i].CanUpgrade())
             {
-                icons[activeAbilitiesCount].sprite = abilities[i].icon;
-                abilityButtons[activeAbilitiesCount].gameObject.SetActive(true);
-                TextMeshProUGUI abilityNameText = abilityButtons[activeAbilitiesCount].GetComponentInChildren<TextMeshProUGUI>();
+                icons[i].sprite = abilities[i].icon;
+                abilityButtons[i].gameObject.SetActive(true);
+                TextMeshProUGUI abilityNameText = abilityButtons[i].GetComponentInChildren<TextMeshProUGUI>();
 
                 if (abilityNameText != null)
                 {
                     abilityNameText.text = abilities[i].abilityName;
                 }
 
-                TextMeshProUGUI[] textComponents = abilityButtons[activeAbilitiesCount].GetComponentsInChildren<TextMeshProUGUI>(true);
+                TextMeshProUGUI[] textComponents = abilityButtons[i].GetComponentsInChildren<TextMeshProUGUI>(true);
 
                 if (textComponents.Length > 1)
                 {
@@ -122,8 +129,7 @@ public class AbilityManager : MonoBehaviour
                         descriptionText.text = abilities[i].description;
                     }
                 }
-
-                activeAbilitiesCount++;
+                chosenAbilities.Add(abilities[i]);
             }
             else
             {
@@ -133,8 +139,9 @@ public class AbilityManager : MonoBehaviour
                 {
                     abilities[i] = replacementAbility;
                     SetDescription(abilities[i]);
-                    chosenAbilities.Add(replacementAbility); 
+                    chosenAbilities.Add(replacementAbility);
                 }
+                break;
             }
         }
     }
@@ -143,19 +150,14 @@ public class AbilityManager : MonoBehaviour
     {
         List<Ability> replacementAbility = new List<Ability>();
 
-        foreach (Ability ability in abilities)
+        for (int i = 0; i < abilities.Count; i++)
         {
-            if (ability.currentLevel == 0 && !chosenAbilities.Contains(ability))
+            if (abilities[i].currentLevel == 0 && !chosenAbilities.Contains(abilities[i]))
             {
-                replacementAbility.Add(ability);
+                replacementAbility.Add(abilities[i]);
+                return replacementAbility[UnityEngine.Random.Range(0, replacementAbility.Count)];
             }
         }
-
-        if (replacementAbility.Count > 0)
-        {
-            return replacementAbility[UnityEngine.Random.Range(0, replacementAbility.Count)];
-        }
-
         return null;
     }
 
@@ -166,82 +168,91 @@ public class AbilityManager : MonoBehaviour
             case Ability.AbilityType.Orb:
                 if (newLevel % 2 == 0 && newLevel != 6)
                 {
-                    ability.description = $"Activates one more orb!!\nLevel: {ability.currentLevel} +1";
+                    ability.description = $"Activates one more orb!!\nLevel: {ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel % 2 == 1)
                 {
-                    ability.description = $"Increases rotation speed by 12%!\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Increases rotation speed by 12%!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel == 6)
                 {
-                    ability.description = $"Evolutionary Stage: The orbs spin in a bigger radius also becoming bigger!\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Evolutionary Stage: The orbs spin in a bigger radius also becoming bigger!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 break;
             case Ability.AbilityType.Molotov:
                 if (newLevel % 2 == 0)
                 {
-                    ability.description = $"Decreases cooldown by 1 second!\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Decreases cooldown by 1 second!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel % 2 == 1)
                 {
-                    ability.description = $"Increases radius of throw by 0.5 meters!\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Increases radius of throw by 0.5 meters!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 break;
             case Ability.AbilityType.Knife:
                 if (newLevel == 3)
                 {
-                    ability.description = $"Activates one more Knife!\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Activates one more Knife!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel % 2 == 0)
                 {
-                    ability.description = $"Increases damage area by 5%\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Increases damage area by 5%\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel % 2 == 1 && newLevel != 5)
                 {
-                    ability.description = $"Increases damage area by 5%.\nLevel:{ability.currentLevel}  +1";
+                    ability.description = $"Increases damage area by 5%.\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel == 5)
                 {
-                    ability.description = $"Evolutionary Stage: The Knives start to spin around the player!\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Evolutionary Stage: The Knives start to spin around the player!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}1";
                 }
                 break;
             case Ability.AbilityType.Rock:
                 if (newLevel % 2 == 0)
                 {
-                    ability.description = $"Decreases shoot delay by 0.05 seconds!\nLevel:{ability.currentLevel}+1";
+                    ability.description = $"Decreases shoot delay by 0.05 seconds!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel % 2 == 1)
                 {
-                    ability.description = $"Increases damage area by 5%.\nLevel:{ability.currentLevel}+1";
+                    ability.description = $"Increases damage area by 5%.\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 break;
             case Ability.AbilityType.Bottle:
                 if (newLevel % 2 == 0)
                 {
-                    ability.description = $"Decreases shoot delay by 0.1 seconds!\nLevel:{ability.currentLevel}+1";
+                    ability.description = $"Decreases shoot delay by 0.1 seconds!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel % 2 == 1 && newLevel != 5)
                 {
-                    ability.description = $"Increases bottle travel speed by 10%!\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Increases bottle travel speed by 10%!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel == 5)
                 {
-                    ability.description = $"Evolutionary Stage: Makes the bottles 2 times bigger!\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Evolutionary Stage: Makes the bottles 2 times bigger!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 break;
             case Ability.AbilityType.Burp:
                 if (newLevel % 2 == 0)
                 {
-                    ability.description = $"Decreases cooldown by 2 seconds.\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Decreases cooldown by 2 seconds.\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel % 2 == 1 && newLevel != 7)
                 {
-                    ability.description = $"Increases damage area by 5%.\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Increases damage area by 5%.\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
                 else if (newLevel == 7)
                 {
-                    ability.description = $"Evolutionary Stage: Activates 3 more Puke Points!\nLevel:{ability.currentLevel} +1";
+                    ability.description = $"Evolutionary Stage: Activates 3 more Puke Points!\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 }
+                break;
+            case Ability.AbilityType.Ring:
+                ability.description = $"Increases player pick up range by 1 meter.\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
+                break;
+            case Ability.AbilityType.Boots:
+                ability.description = $"Increases base move speed by 10%.\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
+                break;
+            case Ability.AbilityType.QuickHands:
+                ability.description = $"Decreases fire rate by 8%.\nLevel:{ability.currentLevel} +1 / {ability.maxLevel}";
                 break;
             default:
                 break;
@@ -252,12 +263,21 @@ public class AbilityManager : MonoBehaviour
     {
         System.Random rng = new System.Random();
 
-        for (int i = abilities.Length - 1; i > 0; i--)
+        for (int i = abilities.Count - 1; i > 0; i--)
         {
             int j = rng.Next(i + 1);
             Ability temp = abilities[i];
             abilities[i] = abilities[j];
-            abilities[j] = temp;
+            if (temp.CanUpgrade())
+            {
+                abilities[j] = temp;
+            }
+            else
+            {
+                abilities.Remove(abilities[j]);
+            }
         }
     }
+
+
 }

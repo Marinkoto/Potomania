@@ -84,7 +84,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.9166667, y: 1.1666666}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  canAttack: 1
   sr: {fileID: 0}
 --- !u!95 &2120553125471048445
 Animator:
@@ -183,11 +184,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   maxHealth: 1
-  expAmount: 1
   deathFX: {fileID: 3659737202206157462, guid: 84f7d4c5a287dca46bbc3516e593d2a2, type: 3}
   whiteMat: {fileID: 2100000, guid: 96be0d44dff016a4e904599ae161727c, type: 2}
   defaultMat: {fileID: 0}
   sr: {fileID: 0}
+  loot: {fileID: 4948162295891866423, guid: 7132985658497c347bb5580dcaf0f42c, type: 3}
 --- !u!114 &2270069157658148995
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public AudioClip levelUp;
     [SerializeField] public AudioClip buttonClick;
     [SerializeField] public AudioClip buttonHover;
+    [SerializeField] public AudioClip itemPickUp;
+    [SerializeField] public AudioClip[] burps;
 
     private void Awake()
     {
@@ -37,17 +39,15 @@ public class AudioManager : MonoBehaviour
     }
     public void PlaySFX(AudioClip clip)
     {
-        SFXSource.clip = clip;
-        SFXSource.Play();
-    }
-    public void PlayShootSFX(AudioClip clip)
-    {
-        SFXSource.clip = clip;
-        SFXSource.Play();
+        if(!SFXSource.isPlaying && SFXSource.isActiveAndEnabled)
+        {
+            SFXSource.clip = clip;
+            SFXSource.Play();
+        }
     }
     public void PlayHitSFX(AudioClip clip)
     {
-        if (!HitSFXSource.isPlaying)
+        if (!HitSFXSource.isPlaying && SFXSource.isActiveAndEnabled)
         {
             HitSFXSource.clip = clip;
             HitSFXSource.Play();
@@ -55,8 +55,10 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayLevelUPSFX(AudioClip clip)
     {
-        LevelUPSFXSource.clip = clip;
-        LevelUPSFXSource.Play();
+        if(!LevelUPSFXSource.isPlaying && LevelUPSFXSource.isActiveAndEnabled)
+        {
+            LevelUPSFXSource.clip = clip;
+            LevelUPSFXSource.Play();
+        }
     }
-
 }

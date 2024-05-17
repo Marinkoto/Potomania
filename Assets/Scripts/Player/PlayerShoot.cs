@@ -20,16 +20,22 @@ public class PlayerShoot : MonoBehaviour
     {
         if (Time.time >= timeStamp && Input.GetMouseButton(0) && Time.timeScale != 0)
         {
-            Shoot();
-            timeStamp = Time.time + PlayerStats.Instance.fireRate;
+            for (int i = 0; i < PlayerStats.Instance.bulletAmount; i++)
+            {
+                Shoot();
+                timeStamp = Time.time + PlayerStats.Instance.fireRate;
+            }
         }
     }
     private void Shoot()
     {
-        animator.SetTrigger("Shoot");
+        if(animator != null)
+        {
+            animator.SetTrigger("Shoot");
+        }
         muzzle.Play();
         CameraShake.instance.ShakeCamera(0.05f, 0.05f, 0.1f);
-        AudioManager.instance.PlayShootSFX(shootSound);
+        AudioManager.instance.PlaySFX(shootSound);
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         Vector2 dir = firePoint.transform.right;

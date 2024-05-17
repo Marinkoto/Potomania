@@ -21,10 +21,6 @@ public class Burp : MonoBehaviour
         shield = GetComponent<ShieldTrigger>();
         nextTimeToUse = Time.time + cooldown;
         burpEffect.gameObject.SetActive(true);
-        foreach(var particle in burpParticles)
-        {
-            particle.gameObject.SetActive(true);
-        }
     }
     private void Update()
     {
@@ -39,6 +35,7 @@ public class Burp : MonoBehaviour
         burpEffect.Play();
         spriteRenderer.color = Color.green;
         yield return new WaitForSeconds(0.8f);
+        AudioManager.instance.PlaySFX(AudioManager.instance.burps[Random.Range(0, AudioManager.instance.burps.Length)]);
         foreach (ParticleSystem burp in burpParticles)
         {
             burp.Play();

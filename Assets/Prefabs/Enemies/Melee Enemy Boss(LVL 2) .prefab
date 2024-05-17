@@ -112,7 +112,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8666071513371558765}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d2a51b3a8ad86246ab20c78657d3f19, type: 3}
   m_Name: 
@@ -125,6 +125,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
+  canAttack: 1
   sr: {fileID: 0}
 --- !u!95 &2120553125471048445
 Animator:
@@ -182,8 +183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 7
   maxHealth: 3
-  expAmount: 15
   deathFX: {fileID: 3659737202206157462, guid: 84f7d4c5a287dca46bbc3516e593d2a2, type: 3}
   whiteMat: {fileID: 2100000, guid: 96be0d44dff016a4e904599ae161727c, type: 2}
   defaultMat: {fileID: 0}
   sr: {fileID: 0}
+  loot: {fileID: 8237615795545773266, guid: 998b64b9189cb344e8a1448bc581c692, type: 3}
