@@ -9,39 +9,38 @@ public class Guns : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] Button[] gunButtons;
-    private string filePath;
     private void Start()
     {
         LoadFromInventory();
-        filePath = Application.persistentDataPath + "/playerInventory.json"; ;
     }
     private void LoadFromInventory()
     {
-        if (File.Exists(filePath))
-        {
-            string json = File.ReadAllText(filePath);
-            PlayerInventory inventory = JsonUtility.FromJson<PlayerInventory>(json);
+        PlayerInventory inventory = GunManager.instance.inventory;
 
-            foreach (string gun in inventory.purchasedGuns)
+        for (int i = 0; i < gunButtons.Length; i++)
+        {
+            gunButtons[i].interactable = false; 
+        }
+
+        foreach (var gun in inventory.purchasedGuns)
+        {
+            switch (gun)
             {
-                switch (gun)
-                {
-                    case "AK-47":
-                        gunButtons[0].interactable = !gun.Equals("AK-47");
-                        break;
-                    case "Pistol":
-                        gunButtons[1].interactable = !gun.Equals("Pistol");
-                        break;
-                    case "Shotgun":
-                        gunButtons[2].interactable = !gun.Equals("Shotgun");
-                        break;
-                    case "Shuriken":
-                        gunButtons[3].interactable = !gun.Equals("Shuriken");
-                        break;
-                    default:
-                        Debug.Log("No valid gun purchased");
-                        break;
-                }
+                case "AK-47":
+                    gunButtons[0].interactable = true;
+                    break;
+                case "Pistol":
+                    gunButtons[1].interactable = true;
+                    break;
+                case "Shotgun":
+                    gunButtons[2].interactable = true;
+                    break;
+                case "Shuriken":
+                    gunButtons[3].interactable = true;
+                    break;
+                default:
+                    Debug.Log("No valid gun purchased");
+                    break;
             }
         }
     }

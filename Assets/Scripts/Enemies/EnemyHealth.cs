@@ -14,11 +14,14 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] SpriteRenderer sr;
     [SerializeField] GameObject loot;
 
+    private bool isDead;
+
     private void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         defaultMat = sr.material;
         health = maxHealth;
+        isDead = false;
     }
 
     private void ResetMaterial()
@@ -31,7 +34,7 @@ public class EnemyHealth : MonoBehaviour
         health -= amount;
         sr.material = whiteMat;
         AudioManager.instance.PlayHitSFX(AudioManager.instance.enemyHit);
-        Invoke("ResetMaterial", 0.15f);
+        Invoke(nameof(ResetMaterial), 0.15f);
         Die();
     }
     private void Die()
@@ -40,9 +43,13 @@ public class EnemyHealth : MonoBehaviour
         {
             GameObject effect = Instantiate(deathFX,transform.position,Quaternion.identity);
             Destroy(effect, 0.5f);
-            Instantiate(loot, transform.position, Quaternion.identity);
-            CurrencyManager.instance.AddCurrency(50000);
+            CurrencyManager.instance.AddCurrency(1);
             Destroy(gameObject);
+            if(!isDead)
+            {
+                Instantiate(loot, transform.position, Quaternion.identity);
+                isDead = true;
+            }
         }
     }
 }

@@ -54,6 +54,7 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         SetStats();
+        SkillManager.instance.LoadData();
     }
     private void OnEnable()
     {
@@ -99,22 +100,23 @@ public class PlayerStats : MonoBehaviour
         switch (type)
         {
             case PlayerType.AK:
-                damage = SkillManager.instance.damage / 4;
+                damage = SkillManager.instance.statHolder.damage / 4;
                 break;
             case PlayerType.Pistol:
-                damage = SkillManager.instance.damage;
+                damage = SkillManager.instance.statHolder.damage;
                 break;
             case PlayerType.Shotgun:
-                damage = SkillManager.instance.damage / 4;
+                damage = SkillManager.instance.statHolder.damage / 4;
                 break;
             case PlayerType.Shuriken:
-                damage = SkillManager.instance.damage / 3;
+                damage = SkillManager.instance.statHolder.damage / 3;
                 break;
             default:
                 break;
         }
-        maxHealth = SkillManager.instance.health;
-        moveSpeedInRadius = SkillManager.instance.moveSpeedInRange;
-        moveSpeedOutRadius = SkillManager.instance.moveSpeedOutRange;
+        maxHealth = SkillManager.instance.statHolder.health;
+        moveSpeedInRadius = SkillManager.instance.statHolder.moveSpeedInRange;
+        moveSpeedOutRadius = SkillManager.instance.statHolder.moveSpeedOutRange;
+        abilityDamage = SkillManager.instance.statHolder.damage / 2;
     }
 }

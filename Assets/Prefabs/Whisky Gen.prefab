@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8539007033200948076}
   - component: {fileID: 8539007033200948079}
   - component: {fileID: 8539007033200948077}
+  - component: {fileID: 4945226827492808298}
   m_Layer: 0
   m_Name: Whisky Gen
   m_TagString: Untagged
@@ -186,9 +187,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.016443968, y: 0.400989}
   m_SpriteTilingProperty:
-    border: {x: 0.5, y: 0.25, z: 0.6875, w: 0.25}
+    border: {x: 0.4, y: 0.2, z: 0.55, w: 0.2}
     pivot: {x: 0.46345028, y: 0.26754388}
-    oldSize: {x: 2, y: 2}
+    oldSize: {x: 1.6, y: 1.6}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -197,6 +198,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.81912327, y: 1.5260285}
   m_EdgeRadius: 0
+--- !u!95 &4945226827492808298
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539007033200948078}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3d6e2b85289452f4c837a67258f78e7d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8539007033979067520
 GameObject:
   m_ObjectHideFlags: 0

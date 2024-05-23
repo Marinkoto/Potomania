@@ -56,6 +56,7 @@ public class Skill : MonoBehaviour
         string json = JsonUtility.ToJson(skillData);
         string skillSavePath = Path.Combine(Application.persistentDataPath, $"skill_{skill.id}.json");
         File.WriteAllText(skillSavePath, json);
+        SkillManager.instance.SaveData();
     }
 
     public void LoadSkillData(Skill skill)
@@ -94,16 +95,16 @@ public class Skill : MonoBehaviour
         CurrencyManager.instance.RemoveCurrency(cost);
         if (type == Type.Health)
         {
-            instance.health += upgradeValue;
+            instance.statHolder.health += upgradeValue;
         }
         if (type == Type.Damage)
         {
-            instance.damage += upgradeValue;
+            instance.statHolder.damage += upgradeValue;
         }
         if (type == Type.MoveSpeed)
         {
-            instance.moveSpeedInRange += upgradeValue;
-            instance.moveSpeedOutRange += upgradeValue - 0.05f;
+            instance.statHolder.moveSpeedInRange += upgradeValue;
+            instance.statHolder.moveSpeedOutRange += upgradeValue - 0.05f;
         }
         this.data.upgraded = true;
         if (nextSkill != null)

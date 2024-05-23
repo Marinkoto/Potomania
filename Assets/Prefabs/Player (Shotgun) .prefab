@@ -35166,6 +35166,7 @@ MonoBehaviour:
   maxHealth: 1
   playerHealth: 1
   bulletAmount: 5
+  type: 0
   currentExp: 0
   maxExp: 1
   level: 0
@@ -40236,7 +40237,7 @@ Transform:
   m_GameObject: {fileID: 8551357064241593559}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.981, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8551357062728338291}

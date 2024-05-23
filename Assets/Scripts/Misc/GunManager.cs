@@ -13,7 +13,7 @@ namespace Assets.Scripts.Misc
         public static GunManager instance;
         [Header("Components")]
         [SerializeField] private Button[] gunButtons;
-        [SerializeField] PlayerInventory inventory;
+        [SerializeField] public PlayerInventory inventory;
         private string filePath;
         private void OnDisable()
         {
@@ -52,6 +52,36 @@ namespace Assets.Scripts.Misc
                 SaveInventory();
             }
             SetButtonStates();
+            GetWeaponPrice(gunName);
+        }
+        private void GetWeaponPrice(string gunName)
+        {
+            switch (gunName)
+            {
+                case "Pistol":
+                    if (!CurrencyManager.instance.HasEnoughCurrency(500))
+                    {
+                        return;
+                    }
+                    CurrencyManager.instance.RemoveCurrency(500);
+                    break;
+                case "Shotgun":
+                    if (!CurrencyManager.instance.HasEnoughCurrency(1000))
+                    {
+                        return;
+                    }
+                    CurrencyManager.instance.RemoveCurrency(1000);
+                    break;
+                case "Shuriken":
+                    if (!CurrencyManager.instance.HasEnoughCurrency(1000))
+                    {
+                        return;
+                    }
+                    CurrencyManager.instance.RemoveCurrency(1000);
+                    break;
+                default:
+                    break;
+            }
         }
         private void SaveInventory()
         {

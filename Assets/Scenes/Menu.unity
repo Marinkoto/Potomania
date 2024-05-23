@@ -3865,7 +3865,7 @@ GameObject:
   - component: {fileID: 182472686}
   - component: {fileID: 182472684}
   m_Layer: 0
-  m_Name: Back Button
+  m_Name: Weapons Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3982,6 +3982,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1337777091}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!95 &182472687
 Animator:
@@ -9621,7 +9633,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shotgun  SP 550
+  m_text: 'Shotgun  SP 1000
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3dcb73c3b9590c4ca8df13cc5a92c62, type: 2}
   m_sharedMaterial: {fileID: -5446924016301962302, guid: c3dcb73c3b9590c4ca8df13cc5a92c62, type: 2}
@@ -22949,6 +22963,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1337777091}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 182472682}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -23673,7 +23699,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -227, y: 315}
+  m_AnchoredPosition: {x: -241, y: 295}
   m_SizeDelta: {x: 768.82, y: 135.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1383808791
@@ -23696,7 +23722,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Riggventure
+  m_text: Potomania
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6344183d5b3165d47b71f56145f64cca, type: 2}
   m_sharedMaterial: {fileID: -4151947091752240152, guid: 6344183d5b3165d47b71f56145f64cca, type: 2}
@@ -23730,7 +23756,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 112.29
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -30291,10 +30317,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327721127fe9e0545883b5e27b632cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  health: 1
-  moveSpeedInRange: 6.5
-  moveSpeedOutRange: 4
+  statHolder:
+    damage: 1
+    health: 1
+    moveSpeedInRange: 6.5
+    moveSpeedOutRange: 4
 --- !u!4 &1771925874
 Transform:
   m_ObjectHideFlags: 0
@@ -31373,7 +31400,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Magnum  SP 350
+  m_text: Magnum  SP 500
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3dcb73c3b9590c4ca8df13cc5a92c62, type: 2}
   m_sharedMaterial: {fileID: -5446924016301962302, guid: c3dcb73c3b9590c4ca8df13cc5a92c62, type: 2}
@@ -32011,7 +32038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shuriken  SP 700
+  m_text: Shuriken  SP 1000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3dcb73c3b9590c4ca8df13cc5a92c62, type: 2}
   m_sharedMaterial: {fileID: -5446924016301962302, guid: c3dcb73c3b9590c4ca8df13cc5a92c62, type: 2}
@@ -68835,22 +68862,6 @@ CompositeCollider2D:
         Y: 60000000
       - X: 130000000
         Y: 60000000
-    - - X: -10000000
-        Y: 41875000
-      - X: -10000000
-        Y: 56875000
-      - X: -11875000
-        Y: 58750000
-      - X: -18125000
-        Y: 58750000
-      - X: -20000000
-        Y: 56875000
-      - X: -20000000
-        Y: 41875000
-      - X: -18125000
-        Y: 40000000
-      - X: -11875000
-        Y: 40000000
     - - X: 90000000
         Y: 41875000
       - X: 90000000
@@ -68904,6 +68915,22 @@ CompositeCollider2D:
       - X: -54375000
         Y: 30000000
       - X: -51250000
+        Y: 30000000
+    - - X: -10000000
+        Y: 31875000
+      - X: -10000000
+        Y: 46875000
+      - X: -11875000
+        Y: 48750000
+      - X: -18125000
+        Y: 48750000
+      - X: -20000000
+        Y: 46875000
+      - X: -20000000
+        Y: 31875000
+      - X: -18125000
+        Y: 30000000
+      - X: -11875000
         Y: 30000000
     - - X: -90000000
         Y: 31875000
@@ -69583,14 +69610,6 @@ CompositeCollider2D:
       - {x: 12, y: 6.9999704}
       - {x: 12.000015, y: 6.1249924}
       - {x: 12.250006, y: 6}
-    - - {x: -1.1875108, y: 4}
-      - {x: -1, y: 4.187511}
-      - {x: -1.0000076, y: 5.6875076}
-      - {x: -1.1875108, y: 5.875}
-      - {x: -1.8125076, y: 5.8749924}
-      - {x: -2, y: 5.687489}
-      - {x: -1.9999924, y: 4.1874924}
-      - {x: -1.8124893, y: 4}
     - - {x: 8.8124895, y: 4}
       - {x: 9, y: 4.187511}
       - {x: 8.999998, y: 5.187505}
@@ -69626,6 +69645,14 @@ CompositeCollider2D:
       - {x: -10, y: 4.687489}
       - {x: -9.999992, y: 3.1874924}
       - {x: -9.8124895, y: 3}
+    - - {x: -1.1875108, y: 3}
+      - {x: -1, y: 3.1875107}
+      - {x: -1.0000076, y: 4.6875076}
+      - {x: -1.1875108, y: 4.875}
+      - {x: -1.8125076, y: 4.8749924}
+      - {x: -2, y: 4.687489}
+      - {x: -1.9999924, y: 3.1874924}
+      - {x: -1.8124893, y: 3}
     - - {x: 1.8124893, y: 3}
       - {x: 2, y: 3.1875107}
       - {x: 1.999998, y: 4.187505}
@@ -70626,6 +70653,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -2, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 29
+      m_TileSpriteIndex: 29
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 23
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 1, y: 3, z: 0}
     second:
       serializedVersion: 2
@@ -70669,8 +70706,8 @@ Tilemap:
   - first: {x: -2, y: 4, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 29
-      m_TileSpriteIndex: 29
+      m_TileIndex: 28
+      m_TileSpriteIndex: 28
       m_TileMatrixIndex: 0
       m_TileColorIndex: 23
       m_TileObjectToInstantiateIndex: 65535
@@ -70691,16 +70728,6 @@ Tilemap:
       serializedVersion: 2
       m_TileIndex: 31
       m_TileSpriteIndex: 31
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 23
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -2, y: 5, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 28
-      m_TileSpriteIndex: 28
       m_TileMatrixIndex: 0
       m_TileColorIndex: 23
       m_TileObjectToInstantiateIndex: 65535

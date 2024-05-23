@@ -49,7 +49,7 @@ public class Timer : MonoBehaviour
     private void UpgradeEnemy()
     {
         upgradeTimer += Time.deltaTime;
-        if(upgradeTimer >= upgradeInterval)
+        if (upgradeTimer >= upgradeInterval)
         {
             indexEnemy++;
             enemyManager.enemyPrefab = enemyHolder.enemies[indexEnemy];
@@ -62,7 +62,7 @@ public class Timer : MonoBehaviour
         if (upgradeTimerBoss >= upgradeIntervalBoss)
         {
             indexBoss++;
-            enemyManager.bossPrefab = enemyHolder.bosses[indexBoss];
+            enemyManager.bossPrefab = enemyHolder.bosses?[indexBoss];
             upgradeTimerBoss = 0;
         }
     }
