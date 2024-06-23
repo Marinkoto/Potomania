@@ -5,9 +5,10 @@ public class EnemyManager : MonoBehaviour
 {
     [Header("Spawn Points + Enemies")]
     [SerializeField] Transform[] spawnPoints;
+    [SerializeField] Transform[] spawnPointParent;
     [SerializeField] public GameObject enemyPrefab;
     [SerializeField] public GameObject bossPrefab;
-    [SerializeField] Transform enemyHolder;
+    [SerializeField] Transform[] enemyHolder;
 
     [Header("Parameters")]
     [SerializeField] int wavesCount = 5;
@@ -21,6 +22,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnWaves());
+        spawnPoints = spawnPointParent[LevelManager.currentIndex].GetComponentsInChildren<Transform>(false);
     }
 
     IEnumerator SpawnWaves()
@@ -52,7 +54,7 @@ public class EnemyManager : MonoBehaviour
     IEnumerator SpawnEnemy()
     {
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(enemyPrefab, spawnPoint.position + new Vector3(Random.Range(0.05f, 0.1f), Random.Range(0.05f, 0.1f)), spawnPoint.rotation,enemyHolder);
+        Instantiate(enemyPrefab, spawnPoint.position + new Vector3(Random.Range(0.05f, 0.1f), Random.Range(0.05f, 0.1f)), spawnPoint.rotation, enemyHolder[LevelManager.currentIndex]);
         yield return null;
     }
 

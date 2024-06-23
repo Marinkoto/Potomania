@@ -43,12 +43,12 @@ public class EnemyHealth : MonoBehaviour
         {
             GameObject effect = Instantiate(deathFX,transform.position,Quaternion.identity);
             Destroy(effect, 0.5f);
-            CurrencyManager.instance.AddCurrency(1);
             Destroy(gameObject);
             if(!isDead)
             {
                 Instantiate(loot, transform.position, Quaternion.identity);
                 isDead = true;
+                ExperienceManager.instance.enemiesKilled++;
             }
         }
     }

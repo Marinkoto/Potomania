@@ -24,7 +24,6 @@ public class CameraShake : MonoBehaviour
     private void Start()
     {
         ShakeCamera(0, 0, 0);
-        virtualCamera.m_Lens.OrthographicSize = 6.5f;
     }
     public void ShakeCamera(float frequency, float amplitude, float duration)
     {

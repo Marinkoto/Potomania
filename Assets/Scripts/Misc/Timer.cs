@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] EnemyManager enemyManager;
     [SerializeField] EnemyHolder enemyHolder;
+    [SerializeField] LevelManager levelManager;
     private void Start()
     {
         currentTime = 0;

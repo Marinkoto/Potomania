@@ -17,82 +17,64 @@ namespace Assets.Scripts.Misc
         private string filePath;
         private void OnDisable()
         {
-            SaveInventory();
+            SaveInventory(filePath);
+        }
+        private void OnEnable()
+        {
+            LoadInventory(filePath);
         }
 
         private void Awake()
         {
-            if(instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            instance = this;
         }
         private void Start()
         {
-            SetButtons();
-            filePath = Application.persistentDataPath + "/playerInventory.json";
-            LoadInventory();
-        }
-        private void SetButtons()
-        {
-            gunButtons[0].onClick.AddListener(() => PurchaseGun("AK-47"));
-            gunButtons[1].onClick.AddListener(() => PurchaseGun("Pistol"));
-            gunButtons[2].onClick.AddListener(() => PurchaseGun("Shotgun"));
-            gunButtons[3].onClick.AddListener(() => PurchaseGun("Shuriken"));
+            filePath = Application.persistentDataPath + "/guns";
+            LoadInventory(filePath);
         }
         public void PurchaseGun(string gunName)
-        {
-            if (!inventory.purchasedGuns.Contains(gunName))
-            {
-                inventory.purchasedGuns.Add(gunName);
-                SaveInventory();
-            }
-            SetButtonStates();
-            GetWeaponPrice(gunName);
-        }
-        private void GetWeaponPrice(string gunName)
         {
             switch (gunName)
             {
                 case "Pistol":
-                    if (!CurrencyManager.instance.HasEnoughCurrency(500))
+                    if (!inventory.purchasedGuns.Contains(gunName) && CurrencyManager.instance.HasEnoughCurrency(500))
                     {
-                        return;
+                        inventory.purchasedGuns.Add(gunName);
+                        SaveInventory(filePath);
                     }
-                    CurrencyManager.instance.RemoveCurrency(500);
+                    SetButtonStates();
                     break;
-                case "Shotgun":
-                    if (!CurrencyManager.instance.HasEnoughCurrency(1000))
+                case "Shotgun": 
+                    if (!inventory.purchasedGuns.Contains(gunName) && CurrencyManager.instance.HasEnoughCurrency(1000))
                     {
-                        return;
+                        inventory.purchasedGuns.Add(gunName);
+                        SaveInventory(filePath);
                     }
-                    CurrencyManager.instance.RemoveCurrency(1000);
+                    SetButtonStates();
                     break;
                 case "Shuriken":
-                    if (!CurrencyManager.instance.HasEnoughCurrency(1000))
+                    if (!inventory.purchasedGuns.Contains(gunName) && CurrencyManager.instance.HasEnoughCurrency(1000))
                     {
-                        return;
+                        inventory.purchasedGuns.Add(gunName);
+                        SaveInventory(filePath);
                     }
-                    CurrencyManager.instance.RemoveCurrency(1000);
+                    SetButtonStates();
                     break;
                 default:
                     break;
             }
         }
-        private void SaveInventory()
+        public void SaveInventory(string path)
         {
             string json = JsonUtility.ToJson(inventory);
-            File.WriteAllText(filePath, json);
+            File.WriteAllText(path, json);
         }
-        public void LoadInventory()
+        public void LoadInventory(string path)
         {
-            if (File.Exists(filePath))
+            if (File.Exists(path))
             {
-                string json = File.ReadAllText(filePath);
+                string json = File.ReadAllText(path);
                 inventory = JsonUtility.FromJson<PlayerInventory>(json);
             }
             else
@@ -117,11 +99,12 @@ namespace Assets.Scripts.Misc
                 }
             }
         }
+        
     }
     [System.Serializable]
     public class PlayerInventory
     {
         public List<string> purchasedGuns = new List<string>();
-
+        public List<string> unlockedLevels = new List<string>();
     }
 }

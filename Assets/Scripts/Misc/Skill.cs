@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
-using static SkillManager;
 
 public class Skill : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public class Skill : MonoBehaviour
     [SerializeField] TextMeshProUGUI descriptionText;
     [SerializeField] Skill nextSkill;
     [SerializeField] SkillData data;
+    [SerializeField] SkillManager skillManager;
 
     private Button skillButton;
     public enum Type
@@ -49,19 +50,15 @@ public class Skill : MonoBehaviour
     }
     public void SaveSkillData(Skill skill)
     {
-        SkillData skillData = new SkillData();
-        skillData.upgraded = skill.data.upgraded;
-        skillData.unlocked = skill.data.unlocked;
-
-        string json = JsonUtility.ToJson(skillData);
-        string skillSavePath = Path.Combine(Application.persistentDataPath, $"skill_{skill.id}.json");
+        string json = JsonUtility.ToJson(skill.data);
+        string skillSavePath = Path.Combine(Application.persistentDataPath, $"skill_{skill.id}");
         File.WriteAllText(skillSavePath, json);
         SkillManager.instance.SaveData();
     }
 
     public void LoadSkillData(Skill skill)
     {
-        string skillSavePath = Path.Combine(Application.persistentDataPath, $"skill_{skill.id}.json");
+        string skillSavePath = Path.Combine(Application.persistentDataPath, $"skill_{skill.id}");
         if (File.Exists(skillSavePath))
         {
             string jsonData = File.ReadAllText(skillSavePath);
@@ -90,21 +87,22 @@ public class Skill : MonoBehaviour
     {
         if (!CurrencyManager.instance.HasEnoughCurrency(cost))
         {
+            CurrencyManager.instance.SetMessage($"Not enough SP to purchase {nameOfSkill} skill");
             return;
         }
         CurrencyManager.instance.RemoveCurrency(cost);
         if (type == Type.Health)
         {
-            instance.statHolder.health += upgradeValue;
+            SkillManager.instance.statsHolder.health += upgradeValue;
         }
         if (type == Type.Damage)
         {
-            instance.statHolder.damage += upgradeValue;
+            SkillManager.instance.statsHolder.damage += upgradeValue;
         }
         if (type == Type.MoveSpeed)
         {
-            instance.statHolder.moveSpeedInRange += upgradeValue;
-            instance.statHolder.moveSpeedOutRange += upgradeValue - 0.05f;
+            SkillManager.instance.statsHolder.moveSpeedInRange += upgradeValue;
+            SkillManager.instance.statsHolder.moveSpeedOutRange += upgradeValue - 0.05f;
         }
         this.data.upgraded = true;
         if (nextSkill != null)
@@ -146,11 +144,11 @@ public class Skill : MonoBehaviour
     }
 }
 [System.Serializable]
-public class SkillData
+public struct SkillData
 {
     [Header("Parameters")]
-    [SerializeField] public bool unlocked = false;
-    [SerializeField] public bool upgraded = false;
+    [SerializeField] public bool unlocked;
+    [SerializeField] public bool upgraded;
     [Header("Needed")]
-    [SerializeField] public bool isUnlockedByDefault = false;
+    [SerializeField] public bool isUnlockedByDefault;
 }

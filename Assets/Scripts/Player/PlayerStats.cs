@@ -47,7 +47,7 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
-            DestroyImmediate(this);
+            Destroy(gameObject);
         }
         level = 1;
     }
@@ -80,8 +80,8 @@ public class PlayerStats : MonoBehaviour
     private void LevelUp()
     {
         level++;
-        damage += 0.05f;
-        abilityDamage += 0.2f;
+        damage += 0.1f;
+        abilityDamage += 0.1f;
         AudioManager.instance.PlayLevelUPSFX(AudioManager.instance.levelUp);
         abilityManager.UpdateUpgradePopupUI();
         if (level >= 5)
@@ -100,23 +100,23 @@ public class PlayerStats : MonoBehaviour
         switch (type)
         {
             case PlayerType.AK:
-                damage = SkillManager.instance.statHolder.damage / 4;
+                damage = SkillManager.instance.statsHolder.damage / 4;
                 break;
             case PlayerType.Pistol:
-                damage = SkillManager.instance.statHolder.damage;
+                damage = SkillManager.instance.statsHolder.damage;
                 break;
             case PlayerType.Shotgun:
-                damage = SkillManager.instance.statHolder.damage / 4;
+                damage = SkillManager.instance.statsHolder.damage / 4;
                 break;
             case PlayerType.Shuriken:
-                damage = SkillManager.instance.statHolder.damage / 3;
+                damage = SkillManager.instance.statsHolder.damage / 3;
                 break;
             default:
                 break;
         }
-        maxHealth = SkillManager.instance.statHolder.health;
-        moveSpeedInRadius = SkillManager.instance.statHolder.moveSpeedInRange;
-        moveSpeedOutRadius = SkillManager.instance.statHolder.moveSpeedOutRange;
-        abilityDamage = SkillManager.instance.statHolder.damage / 2;
+        maxHealth = SkillManager.instance.statsHolder.health;
+        moveSpeedInRadius = SkillManager.instance.statsHolder.moveSpeedInRange;
+        moveSpeedOutRadius = SkillManager.instance.statsHolder.moveSpeedOutRange;
+        abilityDamage = SkillManager.instance.statsHolder.damage / 2;
     }
 }

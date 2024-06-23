@@ -15,6 +15,7 @@ public class ExperienceManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText, expCounter;
     [Header("Parameters")]
     [SerializeField] float currentVelocity = 0;
+    [SerializeField] public int enemiesKilled;
     private void Awake()
     {
         instance = this;
@@ -26,6 +27,7 @@ public class ExperienceManager : MonoBehaviour
         {
             instance = this;
         }
+        enemiesKilled = 0;
     }
     public void AddExp(int amount)
     {

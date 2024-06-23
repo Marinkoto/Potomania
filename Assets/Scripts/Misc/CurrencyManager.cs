@@ -13,13 +13,17 @@ public class CurrencyManager : MonoBehaviour
     [SerializeField] string savePath;
     [Header("Components")]
     [SerializeField] CurrencyUI currencyUI;
+    [SerializeField] TextMeshProUGUI messageUI;
+    private void OnDisable()
+    {
+        SaveCurrency();
+    }
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
-            savePath = Path.Combine(Application.persistentDataPath, "currency.json");
+            savePath = Path.Combine(Application.persistentDataPath + "/currency");
             LoadCurrency();
         }
         else
@@ -27,7 +31,11 @@ public class CurrencyManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+        LoadCurrency();
+    }
     public void AddCurrency(int amount)
     {
         currency += amount;
@@ -35,10 +43,12 @@ public class CurrencyManager : MonoBehaviour
     }
     public void RemoveCurrency(int amount)
     {
-        if (HasEnoughCurrency(amount))
+        if (!HasEnoughCurrency(amount))
         {
-            currency -= amount;
+            SetMessage("You don't have enough SP");
+            return;
         }
+        currency -= amount;
         SaveCurrency();
         currencyUI.UpdateUI();
     }
@@ -68,6 +78,17 @@ public class CurrencyManager : MonoBehaviour
             currency = 250;
         }
         currencyUI.UpdateUI();
+    }
+    public void SetMessage(string message)
+    {
+        messageUI.text = message;
+        StartCoroutine(ResetMessage());
+    }
+    public IEnumerator ResetMessage()
+    {
+        yield return new WaitForSeconds(3);
+        messageUI.text = "";
+        StopAllCoroutines();
     }
     [System.Serializable]
     struct CurrencyData

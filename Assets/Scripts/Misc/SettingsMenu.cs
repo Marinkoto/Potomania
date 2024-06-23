@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,8 +16,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] Toggle musicToggle;
     [SerializeField] Toggle sfxToggle;
     Resolution[] resolutions;
-
-    private void Start()
+    public void Awake()
     {
         LoadResolutionDropdown();
         LoadToggle("Vsync", vsyncToggle);
@@ -64,7 +64,7 @@ public class SettingsMenu : MonoBehaviour
         }
 
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Screen.SetResolution(resolution.width, resolution.height,Screen.fullScreen);
     }
     public void SetSfxToggle(bool enabler)
     {

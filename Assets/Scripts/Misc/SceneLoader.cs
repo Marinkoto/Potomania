@@ -5,13 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    [Header("Components")]
+    [SerializeField] GameObject optionsMenu;
+    private void Awake()
+    {
+        optionsMenu.SetActive(true);
+    }
     private void Start()
     {
-        AudioManager.instance.MusicSource.volume = 0.25f;
+        optionsMenu.SetActive(false);
     }
     public void LoadScene(int index)
     {
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
     public void QuitScene()
     {

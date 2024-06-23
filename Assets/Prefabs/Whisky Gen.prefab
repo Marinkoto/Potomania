@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8539007033200948079}
   - component: {fileID: 8539007033200948077}
   - component: {fileID: 4945226827492808298}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Whisky Gen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5041,6 +5041,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8539007034138298238}
   - component: {fileID: 8539007034138298239}
+  - component: {fileID: 4039710973011464447}
   m_Layer: 0
   m_Name: Radius
   m_TagString: Untagged
@@ -5080,3 +5081,26 @@ CircleCollider2D:
   m_Offset: {x: -0.040177345, y: 0}
   serializedVersion: 2
   m_Radius: 5
+--- !u!114 &4039710973011464447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8539007034138298233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb111c5abf3750849a2f54c2cc96b0ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffedFX:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  nerfedFX:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  volume: {fileID: 0}
